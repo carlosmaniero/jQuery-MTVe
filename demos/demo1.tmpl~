@@ -1,0 +1,11 @@
+<tr>
+  <td>${id}</td>
+  <td><img src="https://graph.facebook.com/${username}/picture"></td>
+  <td>${name}</td>
+  <td>${first_name}</td>
+  <td>${last_name}</td>
+  <td>${link}</td>
+  <td>${username}</td>
+  <td>${gender}</td>
+  <td>${locale}</td>
+</tr>

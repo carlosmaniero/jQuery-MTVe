@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+	<head>
+	  <meta charset="utf-8">
+		<title>jQuery MTVe - Demo 1</title>
+		<script type="text/javascript" src="../src/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="../src/tmpl.js"></script>
+		<script type="text/javascript" src="../src/model.js"></script>
+		<script type="text/javascript" src="../src/view.js"></script>
+		<script type="text/javascript" src="../src/events.js"></script>
+		<script type="text/javascript" src="../src/template.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/main.css">
+		<script type="text/javascript">
+		  $(function(){
+		  
+		    // My Model
+		    var model = $.Model({
+		      me : 'http://graph.facebook.com/carlos.maniero',
+		      base : 'http://graph.facebook.com/',
+		      profile : function() { return this.load('GET', this.me ); },
+		      find_profile : function(username) { return this.load('GET', this.base + username, {} ); },
+		    });
+		    
+		    // My Template
+		    var template = $.Template({
+		      profile : 'demo1.tmpl'
+		    });
+		    
+		    // My view
+		    var view = $.View({
+		      profile : function(){
+		        var data = $.parseJSON(model.get('profile')());
+		        $("table").append(template.get('profile',data));
+		      },
+		      find_profile : function(username){
+		        var data = $.parseJSON(model.get('find_profile')(username));
+		        $('table').append(template.get('profile',data));
+		      }
+		    });
+		    
+		    // My events
+		    events = $.Events({
+		      profile : function(evt){
+		        evt.preventDefault();
+		        view.get("profile")();
+		        $(this).attr('disabled','true');
+		      },
+		      find_profile : function(evt){
+		        evt.preventDefault();
+		        var username = $("input[name=username]").val();
+		        view.get("find_profile")(username);
+		      }
+		    });
+		    $("#button_profile").click(events.get('profile'));
+		    $("#button_find_profile").click(events.get('find_profile'));
+		    
+		  });    	
+		</script>
+	</head>
+	<body id="demo1">
+	  <h1>jQuery MTVe - Demo 1</h1>
+	  <form>
+	  <label>Type a facebook username or id: <input type="text" name="username"></label><button id="button_find_profile">View Profile</button>
+	  <button id="button_profile">View my profile on Facebook</button>
+	  </form>
+	  <table id="movieList" width="100%">
+	    <tr>
+        <th>ID</th>
+        <th>Picture</th>
+        <th>Name</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Link</th>
+        <th>username</th>
+        <th>Gender</th>
+        <th>Locale</th>
+      </tr>
+	  </table>
+	</body>
+</html>

@@ -1,0 +1,25 @@
+*{
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  line-height: 1;
+}
+body{
+  font-family: Ubuntu, Arial, sans;
+  padding: 20px;
+}
+h1{
+  border-radius: 5px;
+  background: #1A1A1A;
+  padding: 20px;
+  color: #FFF;
+  margin-bottom: 20px;
+}
+#demo1 form{
+  margin-bottom: 10px;
+}
+#demo1 table th{
+  background: #FFFF00;
+  padding: 5px;
+  border-radius: 5px;
+}
