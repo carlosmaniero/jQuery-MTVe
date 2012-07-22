@@ -15,9 +15,9 @@
 		  
 		    // My Model
 		    var model = $.Model({
-		      me : 'http://graph.facebook.com/carlos.maniero',
+		      me : 'carlos.maniero',
 		      base : 'http://graph.facebook.com/',
-		      profile : function() { return this.load('GET', this.me ); },
+		      profile : function() { return this.load('GET', this.base + this.me ); },
 		      find_profile : function(username) { return this.load('GET', this.base + username, {} ); },
 		    });
 		    
@@ -39,7 +39,7 @@
 		    });
 		    
 		    // My events
-		    events = $.Events({
+		    var events = $.Events({
 		      profile : function(evt){
 		        evt.preventDefault();
 		        view.get("profile")();
@@ -53,8 +53,8 @@
 		    });
 		    $("#button_profile").click(events.get('profile'));
 		    $("#button_find_profile").click(events.get('find_profile'));
-		    
-		  });    	
+
+      });
 		</script>
 	</head>
 	<body id="demo1">
