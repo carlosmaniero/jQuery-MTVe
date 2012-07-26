@@ -39,7 +39,7 @@
             ret = xhr.responseText;
           }
         }
-        toSend = $.extend(toSend, options);
+        toSend = $.extend(toSend, this.options);
         
         $.ajax(toSend);
         return ret;
